@@ -1,0 +1,24 @@
+{% extends "base_entries.html" %}
+{% blocktitle %}{{ block.super }} | {{ year }}{% endblock %}
+{% block content %}
+    <ul>
+    {% for date in date_list %}
+        <li>{{ date|date }}</li>
+    {% endfor %}
+<div>
+    <h1>All Articles for {{ year|date:"Y" }}</h1>
+    {% for obj in object_list %}
+        <p>
+            {{ obj.title }} - {{ obj.pub_date|date:"F j, Y" }}
+        </p>
+    {% endfor %}
+</div>
+    {% for month in date_list %}
+        
+    <li><a href="{% url entry_archive_year year,month|date:"b" %}">{{ month|date:"F" }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+{% block whatis %}
+    <p>This is a list of months in {{ year }} in which I published entries in my blog.</p>
+{% endblock %}
